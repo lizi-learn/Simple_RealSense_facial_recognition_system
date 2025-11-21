@@ -1,0 +1,67 @@
+<launch>
+  <!-- RealSense相机节点 -->
+  <node name="realsense_camera_node" 
+        pkg="realsense_camera" 
+        type="realsense_camera_node.py" 
+        output="screen">
+    
+    <!-- 相机参数 -->
+    <!-- 提高帧率以减少延迟 -->
+    <param name="width" value="640" />
+    <param name="height" value="480" />
+    <param name="fps" value="30" />
+    
+    <!-- 人脸检测参数 -->
+    <param name="face_confidence_threshold" value="0.5" />
+    <!-- 每帧都检测，减少延迟（设为1表示每帧检测） -->
+    <param name="face_detection_skip" value="1" />
+    
+    <!-- 人脸识别参数（RetinaFace + ArcFace） -->
+    <param name="enable_face_recognition" value="true" />
+    <!-- 识别阈值：0.5-0.6较合适，太低会误识别，太高会识别不到 -->
+    <param name="recognition_threshold" value="0.5" />
+    <param name="recognition_cooldown" value="10.0" />
+    <param name="gpu_id" value="-1" />
+    <!-- 人脸数据库目录，默认在项目根目录下的face_database -->
+    
+    <!-- 语音播报参数 -->
+    <param name="enable_voice_announcement" value="true" />
+    <param name="voice_announcement_interval" value="5.0" />
+    <!-- 音频输出设备，使用 pactl list short sinks 查看可用设备 -->
+    <param name="audio_sink" value="alsa_output.pci-0000_00_1f.3.analog-stereo" />
+    <!-- 微软TTS语音选择，可选：zh-CN-XiaoxiaoNeural, zh-CN-XiaohanNeural, zh-CN-XiaomengNeural 等 -->
+    <param name="tts_voice" value="zh-CN-XiaoxiaoNeural" />
+  </node>
+  
+  <!-- 可选：图像查看器 -->
+  <!-- 
+  <node name="image_view_color" 
+        pkg="image_view" 
+        type="image_view" 
+        args="image:=/camera/color/image_raw" />
+  
+  <node name="image_view_depth" 
+        pkg="image_view" 
+        type="image_view" 
+        args="image:=/camera/depth/image_raw" />
+  
+  <node name="image_view_face" 
+        pkg="image_view" 
+        type="image_view" 
+        args="image:=/camera/face_detection/image_raw" />
+  -->
+  
+  <!-- 可选：图像查看器 -->
+  <!-- 
+  <node name="image_view_color" 
+        pkg="image_view" 
+        type="image_view" 
+        args="image:=/camera/color/image_raw" />
+  
+  <node name="image_view_depth" 
+        pkg="image_view" 
+        type="image_view" 
+        args="image:=/camera/depth/image_raw" />
+  -->
+</launch>
+
